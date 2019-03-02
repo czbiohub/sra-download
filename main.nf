@@ -33,11 +33,11 @@ process filter {
     shell:
     '''
     #!/bin/bash
-    READ_RUN=$(wget -qO- 'http://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=!{id}&result=read_run' | tail -n +2)
-    if [[ -z "$READ_RUN" ]]; then
-         printf "not_found"
-    else
+    READ_RUN=$(wget -qO- 'https://www.ncbi.nlm.nih.gov/sra/?term=SRR2963724' | tail -n +2)
+    if [[ $READ_RUN == *$ID* ]]; then
          printf "!{id}"
+    else
+         printf "not_found"
     fi
     '''
 }
